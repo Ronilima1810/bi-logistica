@@ -1,30 +1,55 @@
-# Ruby BI — Logistics Analytics Platform
+# Ruby BI · Logistics Intelligence
 
-**Camada de inteligência logística com identidade visual inspirada no design system do Ruby Tower Control.**
+**Produto demonstrativo de análise logística desenvolvido com React e FastAPI.**
 
-[![ABRIR PREVIEW](https://img.shields.io/badge/ABRIR_PREVIEW-RUBY_BI-6848D8?style=for-the-badge)](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/?demo=bi)
+[Live preview — Ruby Logistics Analytics](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/ruby/) · [Vitrine de sistemas](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/)
+
+> A demonstração utiliza dados 100% sintéticos. A interface pública reproduz o estilo do Ruby; **não é o ambiente corporativo e não se conecta ao banco, WMS ou APIs de produção**.
 
 ## Produto
 
-Ambiente de análise orientado à operação, com indicadores de faturamento, volumetria, frete e produtividade. O objetivo é apoiar a tomada de decisão por unidade, período e transportadora, com leitura clara e detalhamento operacional.
+O frontend oferece uma experiência visual de software corporativo, com sidebar, tema claro/escuro, tabelas extensas, indicadores, filtros e exportação CSV. Em vez de apenas cards estáticos, as métricas são recalculadas com base nas seleções de UF e transportadora.
 
-### Experiência demonstrativa
+| Visão | Entrega |
+| --- | --- |
+| Visão executiva | Faturamento, volumetria, frete, percentual total e evolução |
+| Eficiência | `Σ fretes / Σ valores NF × 100`, inclusive por transportadora |
+| Operação | Distribuição das etapas de faturamento, expedição e entrega |
+| Documentos | Detalhamento de pedidos, NF-e, clientes fictícios e valores |
+| Performance | Comparativos de parceiros por receita e volume |
+| Arquitetura | Explicação dos contratos e limites da demonstração |
 
-- Interface escura e clara com tipografia Manrope, navegação lateral e tokens visuais baseados na referência do Ruby;
-- Filtros por unidade/UF, período e parceiro logístico;
-- Indicadores de NFs expedidas, volumes, faturamento e frete percentual;
-- Série de evolução operacional e performance de transportadoras;
-- Tabela consolidada e visão conceitual de aging de expedição;
-- Exportação CSV dos dados fictícios.
+## Stack
 
-## Links
+- **Frontend:** React 19, Vite 7, Lucide, CSS responsivo e componentes funcionais.
+- **Backend:** FastAPI + Pydantic com endpoints de demonstração `/api/health`, `/api/shipments` e `/api/metrics`.
+- **Persistência:** nenhuma; registros definidos em código, sem credenciais ou banco corporativo.
+- **CI:** GitHub Actions valida a compilação frontend e a API.
 
-- **[Abrir o Ruby BI no navegador](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/?demo=bi)**
-- [Vitrine de sistemas](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/)
-- [Código público da demonstração](https://github.com/Ronilima1810/formulario-de-matricula/tree/main/portfolio-demos)
+## Executar frontend
 
-## Sobre o código
+Na pasta `frontend/`:
 
-Este repositório `bi-logistica` contém uma **estrutura inicial/incompleta** de frontend e backend. O preview publicado é um frontend estático independente e **não** o produto corporativo real: não faz consultas ao Oracle, WMS, APIs privadas, banco de dados ou sistemas em produção.
+```bash
+npm install
+npm run dev
+```
 
-Para preservar segurança e propriedade intelectual, são utilizados apenas dados sintetizados de forma fictícia. O estilo visual foi reconstruído por referência ao Ruby, sem incluir o seu código operacional privado.
+Acesse o endereço local informado pelo Vite. Para gerar um build estático: `npm run build`, que escreve em `frontend/dist`.
+
+## Executar API demonstrativa
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r backend/requirements.txt
+uvicorn backend.main:app --host 127.0.0.1 --port 8000
+```
+
+Os dados vêm do módulo Python, não de um banco externo. A API demonstrativa e o frontend funcionam independentemente; **integração autenticada entre ambos não foi implementada**.
+
+## Segurança e evolução
+
+Não usar este projeto com dados reais sem criar autenticação, RBAC, validação de entrada, limites de API, logs e conexão segura a fontes autorizadas. Antes de qualquer uso operacional, substituir as fixtures por integrações testadas e revisar os cálculos financeiros contra tabelas contratuais.
+
+**Build verificado:** compilação React/Vite executada com sucesso; dados fictícios e separação da produção preservados.
