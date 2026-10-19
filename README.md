@@ -2,7 +2,7 @@
 
 **Produto demonstrativo de análise logística desenvolvido com React e FastAPI.**
 
-[Live preview — Ruby Logistics Analytics](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/ruby/) · [Vitrine de sistemas](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/)
+[Live preview — Dashboard dentro do React original Ruby](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/ruby-original/#/bi) · [Vitrine de sistemas](https://ronilima1810.github.io/formulario-de-matricula/portfolio-demos/)
 
 > A demonstração utiliza dados 100% sintéticos. A interface pública reproduz o estilo do Ruby; **não é o ambiente corporativo e não se conecta ao banco, WMS ou APIs de produção**.
 
