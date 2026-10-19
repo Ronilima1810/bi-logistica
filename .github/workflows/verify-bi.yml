@@ -1,0 +1,26 @@
+name: Validate BI Logistics
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  frontend-and-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build React analytics interface
+        working-directory: frontend
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Validate synthetic FastAPI
+        run: |
+          python3 -m pip install -r backend/requirements.txt
+          python3 -m compileall -q backend
+          PYTHONPATH=backend python3 -c "import main; x=main.metrics(); assert x['pedidos']==4 and x['faturamento']>0; assert main.health()['connected_to_production']==False"
